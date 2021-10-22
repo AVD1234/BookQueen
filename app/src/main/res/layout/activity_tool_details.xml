@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity.ToolDetails">
+
+    <ImageView
+        android:id="@+id/imgdettool"
+        android:layout_width="160dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:padding="2dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/toolname"
+            android:textColor="@color/hintcolorgrey"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/dettoolname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="3dp"
+        android:text="@string/layout_detailbookownerdertail"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/layout_detailownername"
+            android:textColor="@color/hintcolorgrey"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/toolcontactname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textIsSelectable="true"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/layout_detailownercontact"
+            android:textColor="@color/hintcolorgrey"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/toolcontactphone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textIsSelectable="true"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/toolerormsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/toolsoldtext"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:visibility="gone"
+        app:drawableStartCompat="@drawable/ic_action_error" />
+
+    <Button
+        android:id="@+id/btntoolsold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:background="@color/colorPrimary"
+        android:padding="5dp"
+        android:text="@string/btntool_sold"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/tooldetprogress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:visibility="gone" />
+
+</LinearLayout>

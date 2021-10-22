@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.Contactus">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:text="Contact Us:"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:drawablePadding="2dp"
+            android:maxLines="1"
+            android:padding="5dp"
+            android:text="@string/ashish_dawkhar"
+            android:textColor="@color/black"
+            android:textIsSelectable="true"
+            android:textSize="18sp"
+            app:drawableStartCompat="@drawable/ic_action_person" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:drawablePadding="2dp"
+            android:maxLines="2"
+            android:padding="5dp"
+            android:text="@string/ashishdawkhar123_gmail_com"
+            android:textColor="@color/black"
+            android:textIsSelectable="true"
+            android:textSize="18sp"
+            app:drawableStartCompat="@drawable/ic_action_email" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:drawablePadding="2dp"
+            android:maxLines="2"
+            android:padding="5dp"
+            android:text="@string/_917414910429"
+            android:textColor="@color/black"
+            android:textIsSelectable="true"
+            android:textSize="18sp"
+            app:drawableStartCompat="@drawable/ic_action_phone" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:maxLines="1"
+            android:padding="5dp"
+            android:text="@string/shubham_dhage"
+            android:textColor="@color/black"
+            android:textIsSelectable="true"
+            android:textSize="18sp"
+            app:drawableStartCompat="@drawable/ic_action_person" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:drawablePadding="2dp"
+            android:lineSpacingExtra="5dp"
+            android:maxLines="2"
+            android:padding="5dp"
+            android:text="@string/shubhamdhage456_gmail_com"
+            android:textColor="@color/black"
+            android:textIsSelectable="true"
+            android:textSize="18sp"
+            app:drawableStartCompat="@drawable/ic_action_email" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:drawablePadding="2dp"
+            android:lineSpacingExtra="5dp"
+            android:maxLines="1"
+            android:padding="5dp"
+            android:text="@string/_919860825053"
+            android:textColor="@color/black"
+            android:textIsSelectable="true"
+            android:textSize="18sp"
+            app:drawableStartCompat="@drawable/ic_action_phone" />
+    </LinearLayout>
+</FrameLayout>

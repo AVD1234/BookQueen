@@ -1,0 +1,177 @@
+<resources>
+    <string name="app_name">BookQueen</string>
+    <string name="appicon">AppIcon</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nodatafound">No Data Found..</string>
+    <string name="aboutourapp">BookQueen takes the user to the fascinating world of buying and selling of used Books without any charge.This app is a platform for every student to sell their books online and get used books from any student.It also helps student to get updates of latest events happening in the college.</string>
+    <string name="ourstory">BookQueen is a mobile app that helps user to learn within low price books.Currently we provide this service via this app.We are expecting some help(funds) so that,we could improve the features in the app and there by it reaches lot of users.</string>
+    <string name="addcollegemessage">If your college not exist,click here to ContactUs.</string>
+    <string name="selectimage">Select Image</string>
+    <string name="enterbooknameerror">Enter Bookname</string>
+    <string name="enterbookpublicerror">Enter BookPublication</string>
+    <string name="toastbookadded">Book Added</string>
+    <string name="unabletoloadretry">Unable to upload, Retry</string>
+    <string name="selectbook">Select Book</string>
+    <string name="booksetadded">Bookset Added</string>
+    <string name="selectdate">Select Date</string>
+    <string name="eventadded">Event Added</string>
+    <string name="tooladded">Tool Added</string>
+    <string name="alerttitle">Alert !</string>
+    <string name="dialogdeletebook">Are you sure to Delete Book?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="bookdeleted">Book Deleted</string>
+    <string name="dialogdeletebookset">Are sure to Delete Bookset?</string>
+    <string name="unabletoloadowner">Unable to load Owner Detail</string>
+    <string name="booksetdeleted">BookSet Deleted</string>
+    <string name="completed">Completed</string>
+    <string name="incomplete">InComplete</string>
+    <string name="dialogdeleteevent">Are you sure to Delete Event?</string>
+    <string name="eventdeleted">Event Deleted</string>
+    <string name="unabletodeleteevent">Unable to Delete Event</string>
+    <string name="enterphone">Enter PhoneNumber</string>
+    <string name="invalidphone">Invalid PhoneNumber</string>
+    <string name="nointernet">No Internet</string>
+    <string name="settings">Settings</string>
+    <string name="myitems">Myitems</string>
+    <string name="myprofile">Myprofile</string>
+    <string name="aboutus">About Us</string>
+    <string name="contactus">Contact Us</string>
+    <string name="signout">Sign Out</string>
+    <string name="BookQueen">BookQueen</string>
+    <string name="enterotp">Enter OTP</string>
+    <string name="invalidotp">Enter Valid OTP</string>
+    <string name="otpsent">OTP Sent</string>
+    <string name="verificationfailed">Verification Failed</string>
+    <string name="signinsuccess">SignIn Successful</string>
+    <string name="entername">Enter Name</string>
+    <string name="enteremail">Enter Email</string>
+    <string name="profilesave">Profile Saved</string>
+    <string name="dialogdeletetool">Are sure to Delete Tool?</string>
+    <string name="tooldeleted">Tool Deleted</string>
+    <string name="checkconnection">Please check connection</string>
+    <string name="layoutselectimage">Tap to select Image</string>
+    <string name="layoutselectdate">Select Date..</string>
+    <string name="layout_add_event">ADD EVENT</string>
+    <string name="layout_click_to_select_image">click to select Image</string>
+    <string name="department">Department</string>
+    <string name="book_year">Book Year</string>
+    <string name="layout_book_name">Book Name</string>
+    <string name="layout_book_publication">Book Publication</string>
+    <string name="noteforcontact">Note:Your Name and contact will be taken from your profile</string>
+    <string name="layout_add_book">Add Book</string>
+    <string name="layout_bookset_image">Bookset Image</string>
+    <string name="layout_click_to_select_bookset_collage_image">click to select Collage Image</string>
+    <string name="layout_semister">Semister</string>
+    <string name="layout_atleast_add_3_books">Atleast add 3 books</string>
+    <string name="lauout_book_name1">Book Name1</string>
+    <string name="lauout_book_name2">Book Name2</string>
+    <string name="lauout_book_name3">Book Name3</string>
+    <string name="lauout_book_name4">Book Name4</string>
+    <string name="lauout_book_name5">Book Name5</string>
+    <string name="layout_btnadd_bookset">Add BookSet</string>
+    <string name="layout_publication_of_book_5">Publication of book 5</string>
+    <string name="layout_publication_of_book_4">Publication of book 4</string>
+    <string name="layout_publication_of_book_3">Publication of book 3</string>
+    <string name="layout_publication_of_book_2">Publication of book 2</string>
+    <string name="layout_publication_of_book_1">Publication of book 1</string>
+    <string name="layout_tool_name">Tool Name</string>
+    <string name="layout_btnadd_tool">Add Tool</string>
+    <string name="layout_detailbookname">BookName :</string>
+    <string name="layout_detailbookpubli">BookPublication :</string>
+    <string name="layout_detailbookdept">Department :</string>
+    <string name="layout_detailbookyear">BookYear :</string>
+    <string name="layout_detailbookownerdertail">Owner Details:</string>
+    <string name="layout_detailownername">Name :</string>
+    <string name="layout_detailownercontact">Contact :</string>
+    <string name="layout_booksoldtxt">If the book is sold then please press the sold button</string>
+    <string name="layout_btnbook_sold">Book sold</string>
+    <string name="layout_detailbooksetbook1">Book1 :</string>
+    <string name="layout_detailbooksetbook2">Book2 :</string>
+    <string name="layout_detailbooksetbook3">Book3 :</string>
+    <string name="layout_detailbooksetbook4">Book4 :</string>
+    <string name="layout_detailbooksetbook5">Book5 :</string>
+    <string name="layout_booksetsold">If the bookset is sold then please press the sold button</string>
+    <string name="layout_booksetsoldbtn">Bookset sold</string>
+    <string name="floatingaddevent">addevent</string>
+    <string name="layout_enter_phone">Enter Phone</string>
+    <string name="layout_send_otp">Send OTP</string>
+    <string name="layout_bookicon">bookicon</string>
+    <string name="layout_codesenttext">Enter the verification code send to your mobile number</string>
+    <string name="messageicon">messageicon</string>
+    <string name="layout_enter_otp">Enter OTP</string>
+    <string name="layout_btnverify">Verify</string>
+    <string name="layout_resend_otp">Resend OTP?</string>
+    <string name="layout_profile">Profile</string>
+    <string name="enter_full_name">Enter full Name</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="select_college">Select College</string>
+    <string name="btnsave_profile">Save Profile</string>
+    <string name="toolname">Toolname :</string>
+    <string name="toolsoldtext">If the Tool is sold then please press the sold button</string>
+    <string name="btntool_sold">Tool sold</string>
+    <string name="layout_about_app">About App:</string>
+    <string name="our_story">Our Story</string>
+    <string name="contribute_us">Contribute Us:</string>
+    <string name="ashishUPI">UPI ID: 7414910429@apl</string>
+    <string name="ShubhamUPI">UPI ID: 9860825053@apl</string>
+    <string name="float_add_booksets">Add Booksets</string>
+    <string name="float_add_books">Add Books</string>
+    <string name="ashish_dawkhar">Ashish Dawkhar</string>
+    <string name="ashishdawkhar123_gmail_com">ashishdawkhar123@gmail.com</string>
+    <string name="_917414910429">+917414910429</string>
+    <string name="shubham_dhage">Shubham Dhage</string>
+    <string name="shubhamdhage456_gmail_com">shubhamdhage456@gmail.com</string>
+    <string name="_919860825053">+919860825053</string>
+    <string name="layout_mybooks">MyBooks</string>
+    <string name="layout_mytools">MyTools</string>
+    <string name="layout_mybooksets">MyBookSets</string>
+    <string name="add_items_to_see_here">Add Items to See Here!</string>
+    <string name="profile_icon">Profile icon</string>
+    <string name="edit">Edit</string>
+    <string name="profilename">Name :</string>
+    <string name="profileemail">Email :</string>
+    <string name="profile_college">College :</string>
+    <string name="addtools">addtools</string>
+    <string name="recbook">recbook</string>
+    <string name="eventimage">eventimage</string>
+
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <string-array name="departments">
+        <item>Information Technology</item>
+        <item>Computer Engineering</item>
+        <item>Mechanical Engineering</item>
+        <item>Production Engineering</item>
+        <item>Electrical Engineering</item>
+        <item>Electronics Engineering</item>
+        <item>Civil Engineering</item>
+        <item>E&amp;Tc Engineering </item>
+        <item>FE Common</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="Colleges">
+        <item>Amrutvahini College Of Engineering,Sangamner</item>
+        <item>Others</item>
+    </string-array>
+    <string-array name="BookYear">
+        <item>FE</item>
+        <item>SE</item>
+        <item>TE</item>
+        <item>BE</item>
+        <item>others</item>
+    </string-array>
+    <string-array name="Semister">
+        <item>Semister 1</item>
+        <item>Semister 2</item>
+        <item>Others</item>
+    </string-array>
+
+</resources>

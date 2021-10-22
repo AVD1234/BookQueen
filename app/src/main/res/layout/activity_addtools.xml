@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity.Addbooks">
+
+    <ImageView
+        android:id="@+id/imgaddtool"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/ic_action_addimage" />
+
+    <TextView
+        android:id="@+id/selectimagetools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/layout_click_to_select_image"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/edttoolname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/stroke"
+        android:drawableStart="@drawable/ic_action_tool"
+        android:hint="@string/layout_tool_name"
+        android:inputType="text"
+        android:padding="5dp" />
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        android:padding="5dp"
+        android:text="@string/noteforcontact"
+        android:textColor="@color/hintcolorgrey"
+        android:textSize="14sp"
+        android:visibility="visible"
+        app:drawableStartCompat="@drawable/ic_action_error" />
+
+    <Button
+        android:id="@+id/btnadtool"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="20dp"
+        android:background="@drawable/lgbtnback"
+        android:padding="10dp"
+        android:text="@string/layout_btnadd_tool"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <ProgressBar
+        android:id="@+id/addbookprogresstool"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+</LinearLayout>
