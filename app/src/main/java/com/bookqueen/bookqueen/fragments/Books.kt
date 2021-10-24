@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.*
 import android.widget.ProgressBar
 import android.widget.SearchView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -43,6 +44,7 @@ class Books : Fragment(), bookadapter.OnBookItemClicklistner {
     lateinit var auth: FirebaseAuth
     var booklist = arrayListOf<Booksmodel>()
     lateinit var bookprogressbar: ProgressBar
+    lateinit var nobookfound: TextView
 
     @SuppressLint("SimpleDateFormat")
     override fun onCreateView(
@@ -63,7 +65,7 @@ class Books : Fragment(), bookadapter.OnBookItemClicklistner {
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
         databaseReference = database.getReference("Books")
-
+        nobookfound = view.findViewById(R.id.nobooksavailable)
 
         booklist.clear()
 
@@ -178,6 +180,7 @@ class Books : Fragment(), bookadapter.OnBookItemClicklistner {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private fun filter(text: String) {
         val filteredlist = ArrayList<Booksmodel>()
 
@@ -190,8 +193,13 @@ class Books : Fragment(), bookadapter.OnBookItemClicklistner {
             }
         }
         if (filteredlist.isEmpty()) {
-            Toast.makeText(context, getString(R.string.nodatafound), Toast.LENGTH_SHORT).show()
+            bookrecyclerView.visibility = View.GONE
+            nobookfound.visibility = View.VISIBLE
+            nobookfound.text = "\" $text \" books not found."
+            //Toast.makeText(context, getString(R.string.nodatafound), Toast.LENGTH_SHORT).show()
         } else {
+            bookrecyclerView.visibility = View.VISIBLE
+            nobookfound.visibility = View.GONE
             bookadapter.filterlist(filteredlist, text)
         }
     }

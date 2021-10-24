@@ -7,6 +7,7 @@ import android.provider.Settings
 import android.view.*
 import android.widget.ProgressBar
 import android.widget.SearchView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,6 +40,7 @@ class BookSets : Fragment(), booksetadapter.OnItemBooksetCliclListner {
     lateinit var booksetprogressbar: ProgressBar
     lateinit var auth: FirebaseAuth
     var booksetlist = arrayListOf<Booksetmodel>()
+    lateinit var nobooksetsfound: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,6 +61,7 @@ class BookSets : Fragment(), booksetadapter.OnItemBooksetCliclListner {
         showbooksets()
 
         setHasOptionsMenu(true)
+        nobooksetsfound = view.findViewById(R.id.nobooksetsavailable)
         addbooksets = view.findViewById(R.id.bookSetsFAB)
         addbooksets.setOnClickListener {
             startActivity(Intent(context, Addbooksets::class.java))
@@ -165,6 +168,7 @@ class BookSets : Fragment(), booksetadapter.OnItemBooksetCliclListner {
         })
     }
 
+    @SuppressLint("SetTextI18n")
     private fun filter(newText: String?) {
         val filteredlist = ArrayList<Booksetmodel>()
         for (item in booksetlist) {
@@ -178,13 +182,13 @@ class BookSets : Fragment(), booksetadapter.OnItemBooksetCliclListner {
             }
         }
         if (filteredlist.isEmpty()) {
-            Toast.makeText(
-                context,
-                getString(R.string.nodatafound),
-                Toast.LENGTH_SHORT
-            ).show()
-
+            booksetrecyclerview.visibility = View.GONE
+            nobooksetsfound.visibility = View.VISIBLE
+            nobooksetsfound.text = "\" $newText \" no booksets found"
+            //  Toast.makeText(context, getString(R.string.nodatafound), Toast.LENGTH_SHORT).show()
         } else {
+            booksetrecyclerview.visibility = View.VISIBLE
+            nobooksetsfound.visibility = View.GONE
             booksetadapter.filteredlist(filteredlist, newText!!)
         }
 

@@ -7,6 +7,7 @@ import android.provider.Settings
 import android.view.*
 import android.widget.ProgressBar
 import android.widget.SearchView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -39,6 +40,7 @@ class Tools : Fragment(), tooladapter.OnToolItemClickListner {
     lateinit var toolrecyclerviiew: RecyclerView
     lateinit var toolprogressBar: ProgressBar
     lateinit var tooadapter: tooladapter
+    lateinit var notoolsfound: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,6 +56,7 @@ class Tools : Fragment(), tooladapter.OnToolItemClickListner {
         toolprogressBar = view.findViewById(R.id.toolprogressbar)
         toolswiperefresh = view.findViewById(R.id.toolswiperefresh)
         toolrecyclerviiew = view.findViewById(R.id.toolrecyclerview)
+        notoolsfound = view.findViewById(R.id.notoolsavailable)
         toolrecyclerviiew.setHasFixedSize(true)
         toolslist.clear()
 
@@ -139,6 +142,7 @@ class Tools : Fragment(), tooladapter.OnToolItemClickListner {
         })
     }
 
+    @SuppressLint("SetTextI18n")
     private fun filter(text: String) {
         val filteredlist = ArrayList<Toolmodel>()
 
@@ -151,8 +155,13 @@ class Tools : Fragment(), tooladapter.OnToolItemClickListner {
             }
         }
         if (filteredlist.isEmpty()) {
-            Toast.makeText(context, getString(R.string.nodatafound), Toast.LENGTH_SHORT).show()
+            toolrecyclerviiew.visibility = View.GONE
+            notoolsfound.visibility = View.VISIBLE
+            notoolsfound.text = "\" $text \" no tools found"
+            //Toast.makeText(context, getString(R.string.nodatafound), Toast.LENGTH_SHORT).show()
         } else {
+            toolrecyclerviiew.visibility = View.VISIBLE
+            notoolsfound.visibility = View.GONE
             tooadapter.filterlist(filteredlist, text)
         }
 

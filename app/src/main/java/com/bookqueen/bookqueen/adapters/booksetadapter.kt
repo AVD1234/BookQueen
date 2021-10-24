@@ -1,7 +1,6 @@
 package com.bookqueen.bookqueen.adapters
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -79,21 +78,21 @@ class booksetadapter(
                                         }
                                         //booksetyear.text = bookset.BookYear
                                         if (searchText.isNotEmpty()) {
-                                            val highlightedtext = bookset.Booksetsemister!!.replace(
+                                            val highlightedtext = bookset.Department!!.replace(
                                                 searchText,
                                                 "<font color='red'>$searchText</font>",
                                                 true
                                             )
-                                            semister.text =
+                                            bookdept.text =
                                                 HtmlCompat.fromHtml(
                                                     highlightedtext,
                                                     HtmlCompat.FROM_HTML_MODE_LEGACY
                                                 )
                                         } else {
-                                            semister.text = bookset.Booksetsemister
+                                            bookdept.text = bookset.Department
                                         }
-                                        //semister.text = bookset.Booksetsemister
-                                        bookdept.text = bookset.Department
+                                        semister.text = bookset.Booksetsemister
+                                        //bookdept.text = bookset.Department
                                         Picasso.get().load(bookset.BooksetImage).into(booksetimage)
 
                                     } else {

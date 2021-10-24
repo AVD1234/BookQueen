@@ -138,6 +138,8 @@
     <string name="addtools">addtools</string>
     <string name="recbook">recbook</string>
     <string name="eventimage">eventimage</string>
+    <string name="layout_book_not_found">Book Not Found</string>
+    <string name="layout_delete_event_txt">To delete your added event,long click on event added by you.</string>
 
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
