@@ -11,6 +11,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bookqueen.bookqueen.R
+import com.bookqueen.bookqueen.constants.Mycollege
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -41,7 +42,13 @@ class AddEvents : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         firebaseStorage =
             FirebaseStorage.getInstance().getReference("EventImages" + UUID.randomUUID().toString())
-        databaseReference = FirebaseDatabase.getInstance().getReference("Events")
+        Mycollege.college(object : Mycollege.Mycallback {
+            override fun onCallback(value: String) {
+                databaseReference =
+                    FirebaseDatabase.getInstance().getReference("Events").child(value)
+                loadimage()
+            }
+        })
 
         val calender = Calendar.getInstance()
         datepicker.setOnClickListener {
@@ -62,7 +69,7 @@ class AddEvents : AppCompatActivity() {
                     }
                 }, year, month, day)
             datePickerDialog.show()
-
+            datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
         }
         addevent.setOnClickListener {
             when {
@@ -83,7 +90,6 @@ class AddEvents : AppCompatActivity() {
                 }
             }
         }
-        loadimage()
     }
 
     val REQUEST_CODE = 123
@@ -127,7 +133,8 @@ class AddEvents : AppCompatActivity() {
                     btnaddevent.visibility = View.VISIBLE
                     Toast.makeText(this, getString(R.string.eventadded), Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(this, getString(R.string.unabletoloadretry), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.unabletoloadretry), Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
     }

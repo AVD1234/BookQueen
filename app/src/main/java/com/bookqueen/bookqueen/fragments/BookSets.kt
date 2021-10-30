@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.*
 import android.widget.ProgressBar
 import android.widget.SearchView
@@ -18,6 +19,7 @@ import com.bookqueen.bookqueen.Activity.BooksetDetails
 import com.bookqueen.bookqueen.ConnectionManager.ConnectionManager
 import com.bookqueen.bookqueen.R
 import com.bookqueen.bookqueen.adapters.booksetadapter
+import com.bookqueen.bookqueen.constants.Mycollege
 import com.bookqueen.bookqueen.models.Booksetmodel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -57,8 +59,16 @@ class BookSets : Fragment(), booksetadapter.OnItemBooksetCliclListner {
         booksetprogressbar = view.findViewById(R.id.booksetprogressbar)
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
-        databaseReference = FirebaseDatabase.getInstance().getReference("BookSets")
-        showbooksets()
+        Mycollege.college(object : Mycollege.Mycallback {
+            override fun onCallback(value: String) {
+                Log.d("mycollege", value)
+                databaseReference =
+                    FirebaseDatabase.getInstance().getReference("BookSets").child(value)
+                showbooksets()
+            }
+        })
+
+
 
         setHasOptionsMenu(true)
         nobooksetsfound = view.findViewById(R.id.nobooksetsavailable)
@@ -112,18 +122,28 @@ class BookSets : Fragment(), booksetadapter.OnItemBooksetCliclListner {
                                 userid
                             )
                         )
-                        booksetadapter = booksetadapter(
-                            booksetlist,
-                            this@BookSets
-                        )
-                        booksetadapter.notifyDataSetChanged()
+
+                    }
+                    booksetadapter = booksetadapter(
+                        booksetlist,
+                        this@BookSets
+                    )
+                    booksetadapter.notifyDataSetChanged()
+                    if (booksetadapter.itemCount == 0) {
+                        booksetprogressbar.visibility =
+                            View.GONE
+                        nobooksetsfound.text = getString(R.string.nobooksetsavailable)
+                        nobooksetsfound.visibility = View.VISIBLE
+                        booksetrecyclerview.visibility = View.GONE
+                    } else {
                         booksetrecyclerview.adapter =
                             booksetadapter
                         booksetprogressbar.visibility =
                             View.GONE
+                        booksetrecyclerview.visibility = View.VISIBLE
+                        nobooksetsfound.visibility = View.GONE
+
                     }
-
-
                 } catch (e: Exception) {
                     Toast.makeText(
                         context,
@@ -235,7 +255,7 @@ class BookSets : Fragment(), booksetadapter.OnItemBooksetCliclListner {
             val firebaseStorage =
                 FirebaseStorage.getInstance().getReferenceFromUrl(booksetimage)
             firebaseStorage.delete().addOnSuccessListener {
-                database.getReference("BookSets").child(booksetid)
+                databaseReference.child(booksetid)
                     .removeValue().addOnSuccessListener {
                     }
             }

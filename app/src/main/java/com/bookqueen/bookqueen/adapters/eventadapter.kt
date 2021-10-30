@@ -39,7 +39,7 @@ class eventadapter(
     }
 
     override fun getItemCount(): Int {
-        return eventlist.size
+        return if (eventlist.size == 0) 0 else eventlist.size
     }
 
     inner class eventviewholder(itemview: View) : RecyclerView.ViewHolder(itemview) {

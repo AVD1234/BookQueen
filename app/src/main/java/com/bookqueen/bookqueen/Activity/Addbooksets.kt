@@ -6,11 +6,13 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bookqueen.bookqueen.R
+import com.bookqueen.bookqueen.constants.Mycollege
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -50,7 +52,13 @@ class Addbooksets : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
-        databaseReference = database.getReference("BookSets")
+        Mycollege.college(object : Mycollege.Mycallback {
+            override fun onCallback(value: String) {
+                Log.d("mycollege", value)
+                databaseReference = database.getReference("BookSets").child(value)
+
+            }
+        })
         firebasestorage =
             FirebaseStorage.getInstance().getReference("images" + UUID.randomUUID().toString())
         imgaddbookset = findViewById(R.id.imgaddbookset)
@@ -142,7 +150,10 @@ class Addbooksets : AppCompatActivity() {
 
         addbooksets.setOnClickListener {
             when {
-                imgaddbookset.drawable.constantState == ContextCompat.getDrawable(this,R.drawable.ic_action_addimage)?.constantState -> {
+                imgaddbookset.drawable.constantState == ContextCompat.getDrawable(
+                    this,
+                    R.drawable.ic_action_addimage
+                )?.constantState -> {
                     Toast.makeText(this, getString(R.string.selectimage), Toast.LENGTH_LONG).show()
                     return@setOnClickListener
                 }
@@ -154,7 +165,7 @@ class Addbooksets : AppCompatActivity() {
                 TextUtils.isEmpty(bookname2.text.toString()) && TextUtils.isEmpty(
                     book2publication.text.toString()
                 ) -> {
-                    bookname2.error =getString(R.string.enterbooknameerror)
+                    bookname2.error = getString(R.string.enterbooknameerror)
                     book2publication.error = getString(R.string.enterbookpublicerror)
                     return@setOnClickListener
                 }
@@ -172,7 +183,7 @@ class Addbooksets : AppCompatActivity() {
                 }
                 book4publication.text.toString()
                     .isNotEmpty() && TextUtils.isEmpty(bookname4.text.toString()) -> {
-                    bookname4.error =getString(R.string.enterbooknameerror)
+                    bookname4.error = getString(R.string.enterbooknameerror)
                     return@setOnClickListener
                 }
                 bookname5.text.toString()
@@ -273,7 +284,7 @@ class Addbooksets : AppCompatActivity() {
                 progressBarset.visibility = View.GONE
                 addbooksets.visibility = View.VISIBLE
                 Toast.makeText(this, getString(R.string.booksetadded), Toast.LENGTH_LONG).show()
-                imgaddbookset.setImageDrawable(null)
+                imgaddbookset.setImageResource(R.drawable.ic_action_addimage)
                 bookname1.setText("")
                 bookname2.setText("")
                 bookname3.setText("")
@@ -286,7 +297,8 @@ class Addbooksets : AppCompatActivity() {
                 book5publication.setText("")
 
             } else {
-                Toast.makeText(this, getString(R.string.unabletoloadretry), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.unabletoloadretry), Toast.LENGTH_SHORT)
+                    .show()
                 progressBarset.visibility = View.GONE
                 addbooksets.visibility = View.VISIBLE
             }

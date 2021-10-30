@@ -16,6 +16,7 @@ import com.bookqueen.bookqueen.R
 import com.bookqueen.bookqueen.adapters.bookadapter
 import com.bookqueen.bookqueen.adapters.booksetadapter
 import com.bookqueen.bookqueen.adapters.tooladapter
+import com.bookqueen.bookqueen.constants.Mycollege
 import com.bookqueen.bookqueen.models.Booksetmodel
 import com.bookqueen.bookqueen.models.Booksmodel
 import com.bookqueen.bookqueen.models.Toolmodel
@@ -37,6 +38,8 @@ class Myitems : Fragment(), bookadapter.OnBookItemClicklistner, tooladapter.OnTo
     lateinit var auth: FirebaseAuth
     lateinit var database: FirebaseDatabase
     lateinit var databaseReference: DatabaseReference
+    lateinit var databaseReference1: DatabaseReference
+    lateinit var databaseReference2: DatabaseReference
     var booklist = arrayListOf<Booksmodel>()
     var toolslist = arrayListOf<Toolmodel>()
     var booksetlist = arrayListOf<Booksetmodel>()
@@ -51,25 +54,31 @@ class Myitems : Fragment(), bookadapter.OnBookItemClicklistner, tooladapter.OnTo
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
-        databaseReference = database.getReference("Books")
+        Mycollege.college(object :Mycollege.Mycallback{
+            override fun onCallback(value: String) {
+                databaseReference = database.getReference("Books").child(value)
+                databaseReference1 = database.getReference("BookSets").child(value)
+                databaseReference2 = database.getReference("Tools").child(value)
+                showbooks()
+                showbooksets()
+                showtools()
+            }
+        })
 
         itembookrecyclerView = view.findViewById(R.id.itembookrecyclerview)
         itembookrecyclerView.setHasFixedSize(true)
         booklist.clear()
         itembookrecyclerView.layoutManager = LinearLayoutManager(context)
-        showbooks()
 
         itembooksetrecyclerView = view.findViewById(R.id.itembooksetrecyclerview)
         itembooksetrecyclerView.setHasFixedSize(true)
         booksetlist.clear()
         itembooksetrecyclerView.layoutManager = LinearLayoutManager(context)
-        showbooksets()
 
         itemtoolrecyclerView = view.findViewById(R.id.itemtoolrecyclerview)
         itemtoolrecyclerView.setHasFixedSize(true)
         toolslist.clear()
         itemtoolrecyclerView.layoutManager = GridLayoutManager(context, 2)
-        showtools()
 
 
         return view
@@ -77,7 +86,7 @@ class Myitems : Fragment(), bookadapter.OnBookItemClicklistner, tooladapter.OnTo
 
     private fun showbooksets() {
 
-        database.getReference("BookSets").addValueEventListener(object : ValueEventListener {
+        databaseReference1.addValueEventListener(object : ValueEventListener {
             @SuppressLint("NotifyDataSetChanged")
             override fun onDataChange(snapshot: DataSnapshot) {
                 try {
@@ -129,7 +138,7 @@ class Myitems : Fragment(), bookadapter.OnBookItemClicklistner, tooladapter.OnTo
     }
 
     private fun showtools() {
-        database.getReference("Tools").addValueEventListener(object : ValueEventListener {
+        databaseReference2.addValueEventListener(object : ValueEventListener {
             @SuppressLint("NotifyDataSetChanged")
             override fun onDataChange(snapshot: DataSnapshot) {
 

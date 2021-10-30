@@ -8,7 +8,7 @@
     <string name="nodatafound">No Data Found..</string>
     <string name="aboutourapp">BookQueen takes the user to the fascinating world of buying and selling of used Books without any charge.This app is a platform for every student to sell their books online and get used books from any student.It also helps student to get updates of latest events happening in the college.</string>
     <string name="ourstory">BookQueen is a mobile app that helps user to learn within low price books.Currently we provide this service via this app.We are expecting some help(funds) so that,we could improve the features in the app and there by it reaches lot of users.</string>
-    <string name="addcollegemessage">If your college not exist,click here to ContactUs.</string>
+    <string name="addcollegemessage">If your college does not exist,contact us from ContactUs menu..</string>
     <string name="selectimage">Select Image</string>
     <string name="enterbooknameerror">Enter Bookname</string>
     <string name="enterbookpublicerror">Enter BookPublication</string>
@@ -140,6 +140,10 @@
     <string name="eventimage">eventimage</string>
     <string name="layout_book_not_found">Book Not Found</string>
     <string name="layout_delete_event_txt">To delete your added event,long click on event added by you.</string>
+    <string name="nobookavailable">No Books Available…</string>
+    <string name="nobooksetsavailable">No Booksets Available...</string>
+    <string name="no_tools_available">No Tools Available...</string>
+    <string name="no_events_available">No Events Available...</string>
 
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

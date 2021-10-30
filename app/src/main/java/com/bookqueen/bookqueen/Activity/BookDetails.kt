@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.bookqueen.bookqueen.R
+import com.bookqueen.bookqueen.constants.Mycollege
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -30,6 +32,7 @@ class BookDetails : AppCompatActivity() {
     lateinit var bookimage: ImageView
     lateinit var database: FirebaseDatabase
     lateinit var databaseReference: DatabaseReference
+    lateinit var databaseReference1: DatabaseReference
     lateinit var firebaseStorage: StorageReference
     lateinit var auth: FirebaseAuth
     lateinit var progressBar: ProgressBar
@@ -40,7 +43,13 @@ class BookDetails : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
         databaseReference = database.getReference("Users")
-
+        //databaseReference1 = database.getReference("Books")
+        Mycollege.college(object : Mycollege.Mycallback {
+            override fun onCallback(value: String) {
+                Log.d("mycollege", value)
+                databaseReference1 = database.getReference("Books").child(value)
+            }
+        })
 
         bookname = findViewById(R.id.detbookname)
         bookpubl = findViewById(R.id.detbookpublication)
@@ -136,7 +145,7 @@ class BookDetails : AppCompatActivity() {
     private fun deletebook(bookid:String){
         btnsold.visibility=View.GONE
         firebaseStorage.delete().addOnSuccessListener {
-            database.getReference("Books").child(bookid).removeValue()
+            databaseReference1.child(bookid).removeValue()
                 .addOnSuccessListener {
                     Toast.makeText(this@BookDetails, getString(R.string.bookdeleted), Toast.LENGTH_LONG)
                         .show()

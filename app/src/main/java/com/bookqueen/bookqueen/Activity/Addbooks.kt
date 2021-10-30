@@ -6,11 +6,13 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bookqueen.bookqueen.R
+import com.bookqueen.bookqueen.constants.Mycollege
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -19,7 +21,6 @@ import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.activity_addbooks.*
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 class Addbooks : AppCompatActivity() {
     lateinit var spinner_list_dept: Spinner
@@ -42,7 +43,13 @@ class Addbooks : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
-        databaseReference = database.getReference("Books")
+        Mycollege.college(object : Mycollege.Mycallback {
+            override fun onCallback(value: String) {
+                Log.d("mycollege", value)
+                databaseReference = database.getReference("Books").child(value)
+            }
+        })
+//        databaseReference = database.getReference("Books")
         firebaseStorage =
             FirebaseStorage.getInstance().getReference("images" + UUID.randomUUID().toString())
 
@@ -193,10 +200,11 @@ class Addbooks : AppCompatActivity() {
                 Toast.makeText(this, getString(R.string.toastbookadded), Toast.LENGTH_LONG).show()
                 edtbookname.setText("")
                 edtbookpublication.setText("")
-                imgaddbook.setImageDrawable(null)
+                imgaddbook.setImageResource(R.drawable.ic_action_addimage)
 
             } else {
-                Toast.makeText(this, getString(R.string.unabletoloadretry), Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.unabletoloadretry), Toast.LENGTH_LONG)
+                    .show()
                 progressBar.visibility = View.GONE
                 btnaddbooks.visibility = View.VISIBLE
             }

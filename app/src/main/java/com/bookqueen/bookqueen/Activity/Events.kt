@@ -10,10 +10,7 @@ import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bookqueen.bookqueen.R
 import com.bookqueen.bookqueen.adapters.eventadapter
+import com.bookqueen.bookqueen.constants.Mycollege
 import com.bookqueen.bookqueen.models.Eventsmodel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
@@ -40,6 +38,7 @@ class Events : AppCompatActivity(), eventadapter.oneventitemclicklistner {
     lateinit var eventadapter: eventadapter
     lateinit var firebaseStorage: FirebaseStorage
     lateinit var database: FirebaseDatabase
+    lateinit var noevents: TextView
 
     var eventlist = arrayListOf<Eventsmodel>()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,8 +48,14 @@ class Events : AppCompatActivity(), eventadapter.oneventitemclicklistner {
 
         firebaseStorage = FirebaseStorage.getInstance()
         database = FirebaseDatabase.getInstance()
-        databaseReference = database.getReference("Events")
+        Mycollege.college(object :Mycollege.Mycallback{
+            override fun onCallback(value: String) {
+                databaseReference = database.getReference("Events").child(value)
+                loadevents()
+            }
+        })
         auth = FirebaseAuth.getInstance()
+        noevents = findViewById(R.id.noevents)
         eventswiperefresh = findViewById(R.id.eventswipelayout)
         eventprogressbar = findViewById(R.id.eventprogressbar)
         eventrecyclerview = findViewById(R.id.eventrecyclerview)
@@ -59,14 +64,13 @@ class Events : AppCompatActivity(), eventadapter.oneventitemclicklistner {
         linearLayoutManager.stackFromEnd = true
         linearLayoutManager.reverseLayout = true
         eventrecyclerview.layoutManager = linearLayoutManager
-        eventlist.clear()
 
+        eventlist.clear()
 
         eventfloatingbutton = findViewById(R.id.eventfloatingbutton)
         eventfloatingbutton.setOnClickListener {
             startActivity(Intent(this, AddEvents::class.java))
         }
-        loadevents()
         eventswiperefresh.setOnRefreshListener {
             eventlist.clear()
             eventswiperefresh.isRefreshing = false
@@ -108,8 +112,7 @@ class Events : AppCompatActivity(), eventadapter.oneventitemclicklistner {
                         )
                         eventadapter = eventadapter(eventlist, this@Events)
                         eventadapter.notifyDataSetChanged()
-                        eventrecyclerview.adapter = eventadapter
-                        eventprogressbar.visibility = View.GONE
+
                     } else {
                         eventlist.add(
                             Eventsmodel(
@@ -121,18 +124,30 @@ class Events : AppCompatActivity(), eventadapter.oneventitemclicklistner {
                                 R.color.red
                             )
                         )
-                        eventadapter = eventadapter(eventlist, this@Events)
-                        eventadapter.notifyDataSetChanged()
-                        eventrecyclerview.adapter = eventadapter
-                        eventprogressbar.visibility = View.GONE
-
                     }
+                }
+                eventadapter = eventadapter(eventlist, this@Events)
+                eventadapter.notifyDataSetChanged()
+                if (eventadapter.itemCount == 0) {
+                    eventrecyclerview.visibility = View.GONE
+                    eventprogressbar.visibility = View.GONE
+                    noevents.text = getString(R.string.no_events_available)
+                    noevents.visibility = View.VISIBLE
+                } else {
+                    eventrecyclerview.adapter = eventadapter
+                    eventprogressbar.visibility = View.GONE
+                    noevents.visibility = View.GONE
+                    eventrecyclerview.visibility = View.VISIBLE
                 }
 
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@Events, getString(R.string.unabletoloadretry), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@Events,
+                    getString(R.string.unabletoloadretry),
+                    Toast.LENGTH_SHORT
+                ).show()
                 eventprogressbar.visibility = View.GONE
             }
         })
@@ -193,7 +208,7 @@ class Events : AppCompatActivity(), eventadapter.oneventitemclicklistner {
 
     private fun deleteevent(eventimage: String, eventid: String) {
         firebaseStorage.getReferenceFromUrl(eventimage).delete().addOnSuccessListener {
-            database.getReference("Events").child(eventid).removeValue().addOnSuccessListener {
+            databaseReference.child(eventid).removeValue().addOnSuccessListener {
                 Toast.makeText(this, getString(R.string.eventdeleted), Toast.LENGTH_SHORT)
                     .show()
             }.addOnFailureListener {

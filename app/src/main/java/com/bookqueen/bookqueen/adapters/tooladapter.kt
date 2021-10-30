@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bookqueen.bookqueen.R
 import com.bookqueen.bookqueen.constants.Mycollege
 import com.bookqueen.bookqueen.models.Toolmodel
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -33,7 +32,7 @@ class tooladapter(
 
     override fun onBindViewHolder(holder: toolviewholder, position: Int) {
         val view = toolslist[position]
-        holder.dind(view, onItemClickListener)
+        holder.bind(view, onItemClickListener)
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -46,7 +45,7 @@ class tooladapter(
     }
 
     override fun getItemCount(): Int {
-        return toolslist.size
+        return if (toolslist.size == 0) 0 else toolslist.size
     }
 
     inner class toolviewholder(itemview: View) : RecyclerView.ViewHolder(itemview) {
@@ -105,12 +104,9 @@ class tooladapter(
                                     } else {
                                         toolslist.remove(tool)
                                         notifyDataSetChanged()
-
                                     }
-
                                 }
                             }
-
                             override fun onCancelled(error: DatabaseError) {
 
                             }
@@ -122,7 +118,6 @@ class tooladapter(
                 clicklistner.OntoolItemclick(tool)
             }
         }
-
     }
 
     interface OnToolItemClickListner {

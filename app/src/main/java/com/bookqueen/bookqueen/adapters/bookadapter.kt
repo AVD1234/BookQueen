@@ -49,13 +49,13 @@ class bookadapter(
 //        holder.bookpublication.text=view.Bookpublication
 //        holder.bookdept.text=view.BookDept
 //        Picasso.get().load(view.Bookimage).into(holder.bookimage)
-        holder.dind(view, itemClickListener)
+        holder.bind(view, itemClickListener)
 
 
     }
 
     override fun getItemCount(): Int {
-        return booklist.size
+        return if (booklist.size == 0) 0 else booklist.size
     }
 
     inner class bookholder(view: View) : RecyclerView.ViewHolder(view) {
@@ -89,7 +89,6 @@ class bookadapter(
         fun bind(book: Booksmodel, clicklistner: OnBookItemClicklistner) {
 
             val database = FirebaseDatabase.getInstance()
-            val auth = FirebaseAuth.getInstance()
             Mycollege.college(object : Mycollege.Mycallback {
                 override fun onCallback(value: String) {
                     Log.d("Mycoolege", value)
@@ -146,12 +145,10 @@ class bookadapter(
                 }
             })
 
-
             itemView.setOnClickListener {
                 clicklistner.onBookItemclick(book)
             }
         }
-
     }
 
     interface OnBookItemClicklistner {

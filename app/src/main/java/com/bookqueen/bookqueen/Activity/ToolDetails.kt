@@ -12,6 +12,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.bookqueen.bookqueen.R
+import com.bookqueen.bookqueen.constants.Mycollege
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -28,6 +29,7 @@ class ToolDetails : AppCompatActivity() {
     lateinit var toolimage: ImageView
     lateinit var database: FirebaseDatabase
     lateinit var databaseReference: DatabaseReference
+    lateinit var databaseReference1: DatabaseReference
     lateinit var firebaseStorage: StorageReference
     lateinit var auth: FirebaseAuth
     lateinit var tooldetprogressBar: ProgressBar
@@ -46,6 +48,11 @@ class ToolDetails : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
         databaseReference = database.getReference("Users")
+        Mycollege.college(object : Mycollege.Mycallback {
+            override fun onCallback(value: String) {
+                databaseReference1 = database.getReference("Tools").child(value)
+            }
+        })
         firebaseStorage = FirebaseStorage.getInstance()
             .getReferenceFromUrl(intent.getStringExtra("toolimage").toString())
 
@@ -137,7 +144,7 @@ class ToolDetails : AppCompatActivity() {
     fun deletetool() {
         btntoolsold.visibility = View.GONE
         firebaseStorage.delete().addOnSuccessListener {
-            database.getReference("Tools").child(intent.getStringExtra("toolid").toString())
+            databaseReference1.child(intent.getStringExtra("toolid").toString())
                 .removeValue().addOnSuccessListener {
                     Toast.makeText(this, getString(R.string.tooldeleted), Toast.LENGTH_LONG)
                         .show()

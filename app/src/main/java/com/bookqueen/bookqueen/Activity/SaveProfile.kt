@@ -6,8 +6,10 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentTransaction
 import com.bookqueen.bookqueen.R
 import com.bookqueen.bookqueen.fragments.Contactus
+import com.bookqueen.bookqueen.fragments.Home
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
@@ -20,7 +22,6 @@ class SaveProfile : AppCompatActivity() {
     lateinit var database: FirebaseDatabase
     lateinit var databaseReference: DatabaseReference
     lateinit var spinner_list_college: Spinner
-    lateinit var addcollegemessage: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +31,6 @@ class SaveProfile : AppCompatActivity() {
         fullname = findViewById(R.id.sname)
         email = findViewById(R.id.semail)
         saveProfile = findViewById(R.id.btnsaveprofile)
-        addcollegemessage = findViewById(R.id.erroraddcollege)
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
         databaseReference = database.getReference("Users")
@@ -101,10 +101,7 @@ class SaveProfile : AppCompatActivity() {
                 }
             }
         }
-        addcollegemessage.setOnClickListener {
-            val intent = Intent(this@SaveProfile, Contactus::class.java)
-            startActivity(intent)
-        }
+
     }
 
     private fun saveuserprofile(name: String, email: String, college: String) {
@@ -118,5 +115,4 @@ class SaveProfile : AppCompatActivity() {
         finish()
 
     }
-
 }

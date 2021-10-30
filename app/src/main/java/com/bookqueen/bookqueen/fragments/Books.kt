@@ -64,7 +64,14 @@ class Books : Fragment(), bookadapter.OnBookItemClicklistner {
         bookprogressbar.visibility = View.VISIBLE
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
-        databaseReference = database.getReference("Books")
+        Mycollege.college(object : Mycollege.Mycallback {
+            override fun onCallback(value: String) {
+                Log.d("mycollege", value)
+                databaseReference = database.getReference("Books").child(value)
+                showbooks()
+
+            }
+        })
         nobookfound = view.findViewById(R.id.nobooksavailable)
 
         booklist.clear()
@@ -77,22 +84,17 @@ class Books : Fragment(), bookadapter.OnBookItemClicklistner {
             showbooks()
         }
 
-        showbooks()
 
         addbooks.setOnClickListener {
             startActivity(Intent(context, Addbooks::class.java))
 
         }
 
-        Mycollege.college(object : Mycollege.Mycallback {
-            override fun onCallback(value: String) {
-                Log.d("mycollege", value)
-            }
-        })
 
         return view
     }
 
+    @SuppressLint("NotifyDataSetChanged", "SetTextI18n")
     private fun showbooks() {
         databaseReference.addValueEventListener(object : ValueEventListener {
             @SuppressLint("NotifyDataSetChanged")
@@ -121,24 +123,33 @@ class Books : Fragment(), bookadapter.OnBookItemClicklistner {
                             )
                         )
 
-                        bookadapter =
-                            bookadapter(
-                                booklist,
-                                this@Books
-                            )
-                        bookadapter.notifyDataSetChanged()
+                    }
+                    bookadapter =
+                        bookadapter(
+                            booklist,
+                            this@Books
+                        )
+                    bookadapter.notifyDataSetChanged()
+                    Log.d("Booksize", (bookadapter.itemCount.toString()))
+                    if (bookadapter.itemCount == 0) {
+                        bookprogressbar.visibility =
+                            View.GONE
+                        nobookfound.text = getString(R.string.nobookavailable)
+                        nobookfound.visibility = View.VISIBLE
+                        bookrecyclerView.visibility = View.GONE
+                    } else {
                         bookrecyclerView.adapter =
                             bookadapter
                         bookprogressbar.visibility =
                             View.GONE
+                        bookrecyclerView.visibility = View.VISIBLE
+                        nobookfound.visibility = View.GONE
 
                     }
-
 
                 } catch (e: Exception) {
                     Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
                     bookprogressbar.visibility = View.GONE
-
                 }
             }
 
@@ -147,6 +158,7 @@ class Books : Fragment(), bookadapter.OnBookItemClicklistner {
                 bookprogressbar.visibility = View.GONE
             }
         })
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -247,7 +259,7 @@ class Books : Fragment(), bookadapter.OnBookItemClicklistner {
             val firebaseStorage =
                 FirebaseStorage.getInstance().getReferenceFromUrl(bookimage)
             firebaseStorage.delete().addOnSuccessListener {
-                database.getReference("Books").child(bookid)
+                databaseReference.child(bookid)
                     .removeValue().addOnSuccessListener {
                     }
             }

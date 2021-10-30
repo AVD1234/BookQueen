@@ -42,7 +42,8 @@ class booksetadapter(
     }
 
     override fun getItemCount(): Int {
-        return Booksetlist.size
+
+        return if (Booksetlist.size == 0) 0 else Booksetlist.size
     }
 
     inner class booksetviwholder(itemview: View) : RecyclerView.ViewHolder(itemview) {

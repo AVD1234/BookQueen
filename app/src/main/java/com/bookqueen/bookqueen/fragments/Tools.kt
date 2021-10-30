@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.*
 import android.widget.ProgressBar
 import android.widget.SearchView
@@ -17,6 +18,7 @@ import com.bookqueen.bookqueen.Activity.Addtools
 import com.bookqueen.bookqueen.ConnectionManager.ConnectionManager
 import com.bookqueen.bookqueen.R
 import com.bookqueen.bookqueen.adapters.tooladapter
+import com.bookqueen.bookqueen.constants.Mycollege
 import com.bookqueen.bookqueen.models.Toolmodel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -52,7 +54,14 @@ class Tools : Fragment(), tooladapter.OnToolItemClickListner {
 
         database = FirebaseDatabase.getInstance()
         auth = FirebaseAuth.getInstance()
-        databaseReference = FirebaseDatabase.getInstance().getReference("Tools")
+        Mycollege.college(object : Mycollege.Mycallback {
+            override fun onCallback(value: String) {
+                Log.d("mycollege", value)
+                databaseReference = FirebaseDatabase.getInstance().getReference("Tools").child(value)
+                loaddata()
+            }
+        })
+
         toolprogressBar = view.findViewById(R.id.toolprogressbar)
         toolswiperefresh = view.findViewById(R.id.toolswiperefresh)
         toolrecyclerviiew = view.findViewById(R.id.toolrecyclerview)
@@ -66,8 +75,6 @@ class Tools : Fragment(), tooladapter.OnToolItemClickListner {
         addtools.setOnClickListener {
             startActivity(Intent(context, Addtools::class.java))
         }
-
-        loaddata()
 
         toolswiperefresh.setOnRefreshListener {
             toolslist.clear()
@@ -102,12 +109,21 @@ class Tools : Fragment(), tooladapter.OnToolItemClickListner {
                                 date
                             )
                         )
-                        tooadapter =
-                            tooladapter(toolslist, this@Tools)
-                        tooadapter.notifyDataSetChanged()
+                    }
+                    tooadapter =
+                        tooladapter(toolslist, this@Tools)
+                    tooadapter.notifyDataSetChanged()
+                    if (tooadapter.itemCount == 0) {
+
+                        toolrecyclerviiew.visibility = View.GONE
+                        toolprogressBar.visibility = View.GONE
+                        notoolsfound.text = getString(R.string.no_tools_available)
+                        notoolsfound.visibility = View.VISIBLE
+                    } else {
                         toolrecyclerviiew.adapter = tooadapter
                         toolprogressBar.visibility = View.GONE
-
+                        toolrecyclerviiew.visibility = View.VISIBLE
+                        notoolsfound.visibility = View.GONE
                     }
                 } catch (e: Exception) {
                     Toast.makeText(context, e.message.toString(), Toast.LENGTH_LONG).show()
@@ -202,7 +218,7 @@ class Tools : Fragment(), tooladapter.OnToolItemClickListner {
             val firebaseStorage =
                 FirebaseStorage.getInstance().getReferenceFromUrl(toolimage)
             firebaseStorage.delete().addOnSuccessListener {
-                database.getReference("Tools").child(toolid)
+                databaseReference.child(toolid)
                     .removeValue().addOnSuccessListener {
                     }
             }

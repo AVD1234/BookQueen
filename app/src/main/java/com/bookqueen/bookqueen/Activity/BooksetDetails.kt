@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.bookqueen.bookqueen.R
+import com.bookqueen.bookqueen.constants.Mycollege
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -33,6 +35,7 @@ class BooksetDetails : AppCompatActivity() {
     lateinit var booksetimage: ImageView
     lateinit var database: FirebaseDatabase
     lateinit var databaseReference: DatabaseReference
+    lateinit var databaseReferenc1: DatabaseReference
     lateinit var firebaseStorage: StorageReference
     lateinit var auth: FirebaseAuth
     lateinit var setdetailprogressBar: ProgressBar
@@ -43,6 +46,12 @@ class BooksetDetails : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
         databaseReference = database.getReference("Users")
+        Mycollege.college(object : Mycollege.Mycallback {
+            override fun onCallback(value: String) {
+                Log.d("mycollege", value)
+                databaseReferenc1= database.getReference("BookSets").child(value)
+            }
+        })
 
         book1 = findViewById(R.id.detbook1)
         book1.text = intent.getStringExtra("book1").toString()
@@ -143,7 +152,7 @@ class BooksetDetails : AppCompatActivity() {
     private fun Deletebookset() {
         btnsetsold.visibility = View.GONE
         firebaseStorage.delete().addOnSuccessListener {
-            database.getReference("BookSets").child(intent.getStringExtra("booksetid").toString())
+            databaseReferenc1.child(intent.getStringExtra("booksetid").toString())
                 .removeValue()
                 .addOnSuccessListener {
                     Toast.makeText(this, getString(R.string.booksetdeleted), Toast.LENGTH_SHORT)

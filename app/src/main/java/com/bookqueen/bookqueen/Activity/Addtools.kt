@@ -6,11 +6,13 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bookqueen.bookqueen.R
+import com.bookqueen.bookqueen.constants.Mycollege
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -35,6 +37,12 @@ class Addtools : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
+        Mycollege.college(object : Mycollege.Mycallback {
+            override fun onCallback(value: String) {
+                Log.d("mycollege", value)
+                databaseReference = database.getReference("Tools").child(value)
+            }
+        })
         databaseReference = database.getReference("Tools")
         firebaseStorage =
             FirebaseStorage.getInstance().getReference("images" + UUID.randomUUID().toString())
@@ -114,10 +122,11 @@ class Addtools : AppCompatActivity() {
                 btnaddtools.visibility = View.VISIBLE
                 Toast.makeText(this, getString(R.string.tooladded), Toast.LENGTH_SHORT).show()
                 edttoolname.setText("")
-                imgaddtool.setImageDrawable(null)
+                imgaddtool.setImageResource(R.drawable.ic_action_addimage)
 
             } else {
-                Toast.makeText(this, getString(R.string.unabletoloadretry), Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.unabletoloadretry), Toast.LENGTH_LONG)
+                    .show()
                 progressBartool.visibility = View.GONE
                 btnaddtools.visibility = View.VISIBLE
             }
