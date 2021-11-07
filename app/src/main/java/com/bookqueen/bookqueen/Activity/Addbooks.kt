@@ -144,7 +144,6 @@ class Addbooks : AppCompatActivity() {
         }
     }
 
-
     private val REQIEST_CODE = 123
     private fun loadimage() {
         imgaddbook.setOnClickListener {
@@ -193,8 +192,6 @@ class Addbooks : AppCompatActivity() {
                 currentuserdb.child("BookYear").setValue(selectedyear)
                 currentuserdb.child("UserUID").setValue(auth.currentUser!!.uid)
 
-
-
                 progressBar.visibility = View.GONE
                 btnaddbooks.visibility = View.VISIBLE
                 Toast.makeText(this, getString(R.string.toastbookadded), Toast.LENGTH_LONG).show()
@@ -209,6 +206,5 @@ class Addbooks : AppCompatActivity() {
                 btnaddbooks.visibility = View.VISIBLE
             }
         }
-
     }
 }

@@ -49,7 +49,7 @@ class bookadapter(
 //        holder.bookpublication.text=view.Bookpublication
 //        holder.bookdept.text=view.BookDept
 //        Picasso.get().load(view.Bookimage).into(holder.bookimage)
-        holder.bind(view, itemClickListener)
+        holder.dind(view, itemClickListener)
 
 
     }
@@ -80,7 +80,7 @@ class bookadapter(
             //bookname.text=book.BookName
             bookpublication.text = book.BookPublication
             bookdept.text = book.Department
-            Picasso.get().load(book.BookImage).into(bookimage)
+            Picasso.get().load(book.BookImage).error(R.drawable.default_book_cover).into(bookimage)
             itemView.setOnClickListener {
                 clicklistner.onBookItemclick(book)
             }

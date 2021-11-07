@@ -38,7 +38,7 @@ class booksetadapter(
 
     override fun onBindViewHolder(holder: booksetviwholder, position: Int) {
         val view = Booksetlist[position]
-        holder.bind(view, onItemClickListener)
+        holder.dind(view, onItemClickListener)
     }
 
     override fun getItemCount(): Int {
@@ -51,6 +51,44 @@ class booksetadapter(
         val semister = itemview.findViewById<TextView>(R.id.recbookpubtxt)
         val bookdept = itemview.findViewById<TextView>(R.id.recbookdepttxt)
         val booksetimage = itemview.findViewById<ImageView>(R.id.recbookimg)
+
+        fun dind(bookset: Booksetmodel, onClickListener: OnItemBooksetCliclListner) {
+            if (searchText.isNotEmpty()) {
+                val highlightedtext = bookset.BookYear!!.replace(
+                    searchText,
+                    "<font color='red'>$searchText</font>",
+                    true
+                )
+                booksetyear.text =
+                    HtmlCompat.fromHtml(
+                        highlightedtext,
+                        HtmlCompat.FROM_HTML_MODE_LEGACY
+                    )
+            } else {
+                booksetyear.text = bookset.BookYear
+            }
+            //booksetyear.text = bookset.BookYear
+            if (searchText.isNotEmpty()) {
+                val highlightedtext = bookset.Department!!.replace(
+                    searchText,
+                    "<font color='red'>$searchText</font>",
+                    true
+                )
+                bookdept.text =
+                    HtmlCompat.fromHtml(
+                        highlightedtext,
+                        HtmlCompat.FROM_HTML_MODE_LEGACY
+                    )
+            } else {
+                bookdept.text = bookset.Department
+            }
+            semister.text = bookset.Booksetsemister
+            //bookdept.text = bookset.Department
+            Picasso.get().load(bookset.BooksetImage).error(R.drawable.default_book_cover).into(booksetimage)
+            itemView.setOnClickListener {
+                onClickListener.OnBooksetclicked(bookset)
+            }
+        }
 
         fun bind(bookset: Booksetmodel, onClickListener: OnItemBooksetCliclListner) {
             val database = FirebaseDatabase.getInstance()

@@ -48,6 +48,30 @@ class eventadapter(
         val eventdate = itemview.findViewById<TextView>(R.id.eventdate)
         val statuslayout = itemview.findViewById<LinearLayout>(R.id.statuslayout)
 
+        @SuppressLint("SimpleDateFormat")
+        fun dind(events: Eventsmodel, clicklistner: oneventitemclicklistner) {
+            eventstatus.text = events.status
+            val sdf = SimpleDateFormat(
+                "EEE MMM dd HH:mm:ss zzz yyyy",
+                Locale.ENGLISH
+            )
+            val sdf1 = SimpleDateFormat("dd/MM/yyyy")
+            val redate = sdf1.format(sdf.parse(events.datetime)!!)
+            eventdate.text = redate.toString()
+            Picasso.get().load(events.EventImage).into(eventimage)
+            statuslayout.setBackgroundColor(events.layoutcolor)
+            itemView.setOnClickListener {
+                clicklistner.oneventitemclick(events)
+            }
+            itemView.setOnLongClickListener(object : View.OnLongClickListener {
+                override fun onLongClick(v: View?): Boolean {
+                    clicklistner.oneventitemlongclick(events)
+                    return true
+                }
+            })
+        }
+
+
         @SuppressLint("ResourceAsColor", "SimpleDateFormat")
         fun bind(events: Eventsmodel, clicklistner: oneventitemclicklistner) {
             val database = FirebaseDatabase.getInstance()

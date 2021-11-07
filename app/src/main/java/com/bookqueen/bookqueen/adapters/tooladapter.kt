@@ -32,7 +32,7 @@ class tooladapter(
 
     override fun onBindViewHolder(holder: toolviewholder, position: Int) {
         val view = toolslist[position]
-        holder.bind(view, onItemClickListener)
+        holder.dind(view, onItemClickListener)
     }
 
     @SuppressLint("NotifyDataSetChanged")
