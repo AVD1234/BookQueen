@@ -3,10 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ashis/bookstoreproject/app/src/main/res/drawable-anydpi/chatbubble.xml" value="0.2203125" />
         <entry key="..\:/Users/ashis/bookstoreproject/app/src/main/res/drawable-anydpi/close.xml" value="0.2169230769230769" />
         <entry key="..\:/Users/ashis/bookstoreproject/app/src/main/res/drawable-anydpi/ic_action_about.xml" value="0.2169230769230769" />
         <entry key="..\:/Users/ashis/bookstoreproject/app/src/main/res/drawable-anydpi/ic_action_add.xml" value="0.2169230769230769" />
         <entry key="..\:/Users/ashis/bookstoreproject/app/src/main/res/drawable-anydpi/ic_action_book.xml" value="0.2169230769230769" />
+        <entry key="..\:/Users/ashis/bookstoreproject/app/src/main/res/drawable-anydpi/ic_action_tool.xml" value="0.2203125" />
         <entry key="..\:/Users/ashis/bookstoreproject/app/src/main/res/drawable-anydpi/mipmap.xml" value="0.2203125" />
         <entry key="..\:/Users/ashis/bookstoreproject/app/src/main/res/drawable/ic_baseline_cancel_24.xml" value="0.2169230769230769" />
         <entry key="..\:/Users/ashis/bookstoreproject/app/src/main/res/layout/activity_add_events.xml" value="0.1" />
